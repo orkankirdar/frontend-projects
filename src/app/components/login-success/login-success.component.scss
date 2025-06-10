@@ -1,0 +1,20 @@
+.success-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #e0f7fa 0%, #c8e6c9 100%);
+}
+
+.success-message-big {
+  color: #219653;
+  background: #eafaf1;
+  border: 2px solid #219653;
+  border-radius: 12px;
+  padding: 2.5rem 3rem;
+  font-size: 2.2rem;
+  font-weight: 800;
+  text-align: center;
+  box-shadow: 0 4px 24px 0 rgba(33, 150, 83, 0.08);
+  letter-spacing: 0.5px;
+} 

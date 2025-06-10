@@ -1,0 +1,81 @@
+<div class="register-container">
+  <div class="register-card">
+    <h2>Register</h2>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          placeholder="example@email.com"
+        />
+        <div class="error-message" *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.errors?.['required']">
+          Email is required
+        </div>
+        <div class="error-message" *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.errors?.['email']">
+          Please enter a valid email address
+        </div>
+      </div>
+
+      <div class="form-group password-group">
+        <label for="password">Password</label>
+        <div class="password-input-wrapper">
+          <input
+            [type]="showPassword() ? 'text' : 'password'"
+            id="password"
+            formControlName="password"
+            placeholder="Enter your password"
+          />
+          <button type="button" class="toggle-password-btn" (click)="togglePasswordVisibility()" tabindex="-1" aria-label="Show/Hide password">
+            <ng-container *ngIf="!showPassword()">
+              <svg width="22" height="22" fill="none" stroke="#888" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="12" rx="9" ry="5.5"/><circle cx="12" cy="12" r="2.5"/></svg>
+            </ng-container>
+            <ng-container *ngIf="showPassword()">
+              <svg width="22" height="22" fill="none" stroke="#888" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="12" rx="9" ry="5.5"/><circle cx="12" cy="12" r="2.5"/><line x1="3" y1="3" x2="21" y2="21"/></svg>
+            </ng-container>
+          </button>
+        </div>
+        <div class="error-message" *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.errors?.['required']">
+          Password is required
+        </div>
+        <div class="error-message"
+          *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.errors?.['passwordStrength']">
+          Password must be at least 6 characters, contain at least 1 uppercase letter and 1 special character
+        </div>
+      </div>
+
+      <div class="form-group password-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <div class="password-input-wrapper">
+          <input
+            [type]="showConfirmPassword() ? 'text' : 'password'"
+            id="confirmPassword"
+            formControlName="confirmPassword"
+            placeholder="Re-enter your password"
+          />
+          <button type="button" class="toggle-password-btn" (click)="toggleConfirmPasswordVisibility()" tabindex="-1" aria-label="Show/Hide confirm password">
+            <ng-container *ngIf="!showConfirmPassword()">
+              <svg width="22" height="22" fill="none" stroke="#888" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="12" rx="9" ry="5.5"/><circle cx="12" cy="12" r="2.5"/></svg>
+            </ng-container>
+            <ng-container *ngIf="showConfirmPassword()">
+              <svg width="22" height="22" fill="none" stroke="#888" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="12" rx="9" ry="5.5"/><circle cx="12" cy="12" r="2.5"/><line x1="3" y1="3" x2="21" y2="21"/></svg>
+            </ng-container>
+          </button>
+        </div>
+        <div class="error-message" *ngIf="registerForm.get('confirmPassword')?.touched && registerForm.get('confirmPassword')?.errors?.['required']">
+          Confirm password is required
+        </div>
+        <div class="error-message" *ngIf="registerForm.get('confirmPassword')?.touched && !passwordsMatch">
+          Passwords do not match
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="!registerForm.valid || !passwordsMatch">Register</button>
+    </form>
+    <div class="bottom-link">
+      <span>Already have an account?</span>
+      <a routerLink="/login">Sign In</a>
+    </div>
+  </div>
+</div> 
